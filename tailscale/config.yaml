@@ -1,6 +1,6 @@
 ---
 name: Tailscale
-version: "1.102.3"
+version: "1.102.3-2"
 slug: tailscale
 description: Zero config VPN for building secure networks
 url: https://github.com/rollingtail/home-assistant
