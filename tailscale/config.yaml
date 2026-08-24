@@ -3,7 +3,7 @@ name: Tailscale
 version: ${TAILSCALE_VERSION}
 slug: tailscale
 description: Zero config VPN for building secure networks
-url: https://github.com/rollingtil/home-assistant
+url: https://github.com/rollingtail/home-assistant
 ingress: true
 ingress_port: 0
 ingress_stream: true
