@@ -37,7 +37,7 @@ RUN \
         /opt/systemd
 
 # Copy root filesystem
-COPY rootfs /BUILD_REPOSITORY
+COPY rootfs /
 
 HEALTHCHECK \
     CMD healthcheck
