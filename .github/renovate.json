@@ -1,15 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests"
-  ],
-  "timezone": "UTC",
-  "dependencyDashboard": false,
-  "schedule": ["* 6 * * 1,4"],
-  "labels": ["tailscale"],
-  "semanticCommits": "enabled",
+  "extends": ["helpers:pinGitHubActionDigests"],
   "rebaseWhen": "behind-base-branch",
+  "dependencyDashboard": false,
+  "labels": ["dependencies"],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
   "customDatasources": {
@@ -21,19 +15,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^tailscale/config\\.yaml$", "^tailscale/Dockerfile$"],
-      "matchStringsStrategy": "any",
-      "matchStrings": [
-        "version:\\s*[\\\"'](?<currentValue>[0-9]+\\.[0-9]+\\.[0-9]+)[\\\"']",
-        "ARG TAILSCALE_VERSION=(?<currentValue>[0-9]+\\.[0-9]+\\.[0-9]+)"
-      ],
-      "depNameTemplate": "tailscale/tailscale",
-      "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^v?(?<version>.*)$"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$", "(^|/)build\\.yaml$"],
+      "managerFilePatterns": ["//Dockerfile$/", "//build.yaml$/"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
@@ -43,7 +25,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$"],
+      "managerFilePatterns": ["//Dockerfile$/"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s\\s(?<package>[a-z0-9][a-z0-9-_]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
@@ -52,6 +34,15 @@
       "datasourceTemplate": "custom.alpine",
       "depNameTemplate": "alpine_3_24/{{package}}",
       "extractVersionTemplate": "^{{{package}}}-(?<version>\\d.*)\\.apk$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["//Dockerfile$/"],
+      "matchStrings": [
+        "ARG TAILSCALE_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "tailscale/tailscale"
     }
   ],
   "packageRules": [
