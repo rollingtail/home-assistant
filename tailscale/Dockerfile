@@ -1,5 +1,4 @@
-ARG BUILD_ARCH=amd64
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/${BUILD_ARCH}:21.0.10
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:21.0.10
 
 FROM ${BUILD_FROM}
 
