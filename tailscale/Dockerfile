@@ -1,12 +1,12 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:21.0.11
-# hadolint ignore=DL3006
+ARG BUILD_ARCH=amd64
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/${BUILD_ARCH}:21.0.10
+
 FROM ${BUILD_FROM}
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-ARG BUILD_ARCH=amd64
 ARG TAILSCALE_VERSION=1.104.7
 RUN \
   apk add --no-cache \
