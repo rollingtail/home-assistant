@@ -15,11 +15,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["//Dockerfile$/", "//build.yaml$/"],
-      "matchStringsStrategy": "any",
+      "managerFilePatterns": ["//Dockerfile$/"],
       "matchStrings": [
-        "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
-        "(aarch64|amd64):\\s[\"']?(?<depName>.*?):(?<currentValue>.*?)[\"']?\\s"
+        "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+"
       ],
       "datasourceTemplate": "docker"
     },
